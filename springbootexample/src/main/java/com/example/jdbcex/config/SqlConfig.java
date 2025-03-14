@@ -11,18 +11,18 @@ import lombok.Getter;
 @PropertySource("classpath:sql.properties")
 public class SqlConfig {
 	@Value("${sql.insert.laptop}")
-private String insert;
-	
+	private String insert;
+
 	@Value("${sql.update.laptop}")
-private String update;
-	
+	private String update;
+
 	@Value("${sql.delete.laptop}")
-private String deleteById;
-	
+	private String deleteById;
+
 //private String deleteAll;
 	@Value("${sql.select.all.laptops}")
-private String getAll;
-	
-@Value("${sql.select.laptop.by.id}")
-private String getById;
+	private String getAll;
+
+	@Value("${sql.select.laptop.by.id}")
+	private String getById;
 }

@@ -21,7 +21,7 @@ import com.example.jdbcex.service.ServiceEx;
 @RestController
 @RequestMapping("/laptops")
 public class LaptopController {
-	private static final Logger logger=LoggerFactory.getLogger(LaptopController.class) ;
+	private static final Logger logger = LoggerFactory.getLogger(LaptopController.class);
 	@Autowired
 	private ServiceEx service;
 
@@ -29,10 +29,10 @@ public class LaptopController {
 	public ResponseEntity<String> insertLaptop(@RequestBody Laptop laptop) {
 		int rows = service.insertLaptop(laptop);
 		if (rows > 0) {
-			logger.info("Laptop inserted successfully",laptop);
+			logger.info("Laptop inserted successfully", laptop);
 			return ResponseEntity.ok("insertion succesful");
 		} else {
-			logger.info("Laptop insertion failed",laptop);
+			logger.info("Laptop insertion failed", laptop);
 			return ResponseEntity.ok("failed to insert");
 		}
 	}
@@ -42,11 +42,11 @@ public class LaptopController {
 		laptop.setId(id);
 		int rows = service.updateLaptop(laptop);
 		if (rows > 0) {
-			 logger.info("Laptop updated successfully",laptop);
+			logger.info("Laptop updated successfully", laptop);
 			return ResponseEntity.ok("UPDATION SUCCESSFUL");
 
 		} else {
-			logger.warn("failed to update laptop,np laptop with given id",laptop);
+			logger.warn("failed to update laptop,np laptop with given id", laptop);
 			return ResponseEntity.ok("FAILED TO UPDATE,NO LAPTOP WITH SUCH ID");
 		}
 	}
@@ -56,10 +56,10 @@ public class LaptopController {
 		// laptop.setId(id);
 		int rows = service.deleteLaptop(id);
 		if (rows > 0) {
-			 logger.info("Laptop deleted successfully",id);
+			logger.info("Laptop deleted successfully", id);
 			return ResponseEntity.ok("DELETION SUCCESSFUL");
 		} else {
-			logger.warn("failed to delete,no laptop with that given id",id);
+			logger.warn("failed to delete,no laptop with that given id", id);
 			return ResponseEntity.ok(" DELETION FAILED, NO LAPTOP WITH SUCH ID");
 		}
 	}
@@ -68,22 +68,24 @@ public class LaptopController {
 	public ResponseEntity<?> getLaptopById(@PathVariable int id) {
 		Laptop laptop = service.getLaptopById(id);
 		if (laptop != null) {
-			 logger.info("Laptop successfully fetched with the given  id",id);
+			logger.info("Laptop successfully fetched with the given  id", id);
 			return ResponseEntity.ok(laptop);
 		} else {
-			logger.warn("failed to fetch Laptop with the given id ",id);
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no laptop with that given id");
+			logger.warn("failed to fetch Laptop with the given id ", id);
+			return ResponseEntity.ok("no laptop with the given id");
+			
 		}
 	}
+
 	@GetMapping("/fetch")
 	public ResponseEntity<List<Laptop>> getAllLaptops() {
-	    List<Laptop> laptops = service.getAllLaptops();  // This should return a List<Laptop>
-	    if (laptops.isEmpty()) {
-	    	logger.info("List of Laptops fetched successfully");
-			
-	        return ResponseEntity.noContent().build();
-	    }
-	    logger.warn("Failed to fetch List of Laptops");
-	    return ResponseEntity.ok(laptops);
+		List<Laptop> laptops = service.getAllLaptops(); // This should return a List<Laptop>
+		if (laptops.isEmpty()) {
+			logger.info("List of Laptops fetched successfully");
+
+			return ResponseEntity.noContent().build();
+		}
+		logger.warn("Failed to fetch List of Laptops");
+		return ResponseEntity.ok(laptops);
 	}
 }
