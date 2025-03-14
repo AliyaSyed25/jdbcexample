@@ -12,6 +12,7 @@ public class SpringbootexampleApplication {
 	public static void main(String[] args) {
 		log.info("----------Application running --------------");
 		SpringApplication.run(SpringbootexampleApplication.class, args);
+		log.info("----------Application running success --------------");
 	}
 
 }
